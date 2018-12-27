@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace CodelyTV\FinderKata\Algorithm;
 
-final class F
+final class BirthDateCompare
 {
     /** @var Thing */
-    public $p1;
+    public $person1;
 
     /** @var Thing */
-    public $p2;
+    public $person2;
 
     /** @var int */
-    public $d;
+    public $diferenceDays;
 }
