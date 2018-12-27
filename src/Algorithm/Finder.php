@@ -52,16 +52,7 @@ final class Finder
         
         for ($i = 0; $i < $personNumbers; $i++) {
             for ($j = $i + 1; $j < $personNumbers; $j++) {
-                $r = new BirthDateCompare();
-                
-                $isTheFirstPersonMinor = $this->_personList[$i]->birthDate < $this->_personList[$j]->birthDate;
-                
-                $r->person1 = $this->_personList[ $isTheFirstPersonMinor ? $i : $j ];
-                $r->person2 = $this->_personList[ $isTheFirstPersonMinor ? $j : $i];
-
-                $r->diferenceDays = $r->person2->birthDate->getTimestamp() - $r->person1->birthDate->getTimestamp();
-
-                $birthDate[] = $r;
+                $birthDate[] = new BirthDateCompare($this->_personList[$i], $this->_personList[$j]);
             }
         }
         
