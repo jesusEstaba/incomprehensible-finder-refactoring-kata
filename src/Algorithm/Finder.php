@@ -24,21 +24,31 @@ final class Finder
     }
     
     private function getBirthdateCompareBy($diference) {
+        if ($diference === Diference::NEAR) {
+            return $this->getBirthdateCompareByNear();
+        }
+        
+        return $this->getBirthdateCompareByFar();
+    }
+    
+    private function getBirthdateCompareByNear() {
         $firstBirthDateCompare = $this->_birthDateCompareList[0];
 
         foreach ($this->_birthDateCompareList as $birthdayCompare) {
-            switch ($diference) {
-                case Diference::NEAR:
-                    if ($birthdayCompare->diferenceDays < $firstBirthDateCompare->diferenceDays) {
-                        $firstBirthDateCompare = $birthdayCompare;
-                    }
-                    break;
+            if ($birthdayCompare->diferenceDays < $firstBirthDateCompare->diferenceDays) {
+                $firstBirthDateCompare = $birthdayCompare;
+            }
+        }
+        
+        return $firstBirthDateCompare;
+    }
+    
+    private function getBirthdateCompareByFar() {
+        $firstBirthDateCompare = $this->_birthDateCompareList[0];
 
-                case Diference::FAR:
-                    if ($birthdayCompare->diferenceDays > $firstBirthDateCompare->diferenceDays) {
-                        $firstBirthDateCompare = $birthdayCompare;
-                    }
-                    break;
+        foreach ($this->_birthDateCompareList as $birthdayCompare) {
+            if ($birthdayCompare->diferenceDays > $firstBirthDateCompare->diferenceDays) {
+                $firstBirthDateCompare = $birthdayCompare;
             }
         }
         
